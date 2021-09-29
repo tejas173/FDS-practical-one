@@ -1,0 +1,32 @@
+name = str(input("Enter the name of employee: "))
+c=int()
+n = str(input("Enter the month: "))
+if(n=='jan'or'march'or'may'or'july'or'august'or'october'or'december'):
+    c=31
+if(n=='april'or'june'or'september'or'november'):
+    c=30 
+if(n=='february'):
+    c=28
+print("Select 1 for manager,2 for team leader,3 for member")
+m = int(input("Enter designation: ")) 
+if(m==1):
+    salary = c*2000
+if(m==2):
+    salary = c*1800
+if(m==3):
+    salary = c*1500
+
+        
+        
+print("Salary = ",salary)
+o =  int(input("Enter the overtime period : "))
+o =o/2
+if(m==1):
+    m = o*2000
+if(m==2):
+    m = o*1800
+if(m==3):
+    m = o*1500
+salary = salary+m
+print("Salary is: ",salary)
+print(o)
