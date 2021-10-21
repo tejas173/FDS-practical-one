@@ -1,0 +1,70 @@
+roll =[]
+n = int(input("Enter the number of students: "))
+for i in range(n):
+    m = int(input("Enter the roll number of students: "))
+    roll.append(m)
+def LinearSearch(roll, n, x):
+    
+    for j in range(0, n):
+
+        if (roll[j] == x):
+
+            return j
+
+    return -1
+
+x = 5
+n = len(roll)
+
+result = LinearSearch(roll, n, x)
+
+if(result == -1):
+
+    print("Rollno not found")
+
+else:
+
+    print("Rollno found at index :", result)
+
+def sentinelSearch(roll, n, x):     
+
+    last = roll[n - 1]
+ 
+    
+    roll[n - 1] = x
+    i = 0
+ 
+    while (roll[i] != x):
+        i += 1
+ 
+   
+    roll[n - 1] = last
+ 
+    if ((i < n - 1) or (roll[n - 1] == x)):
+        print(x, "Rollno  found at index", i)
+    else:
+        print("Rollno not found")
+
+n = len(roll)
+x = 5
+sentinelSearch(roll, n, x)     
+   def binary_search(roll, low, high, x):
+    if high >= low:
+        mid = (high + low) // 2
+        if roll[mid] == x:
+            return mid
+        elif roll[mid] > x:
+            return binary_search(roll, low, mid - 1, x)
+        else:
+            return binary_search(roll, mid + 1, high, x)
+    else:   
+        return -1
+
+x = 5
+ 
+result = binary_search(roll, 0, len(roll)-1, x)
+ 
+if result != -1:
+    print("Rollno is present at index", str(result))
+else:
+    print("Rollno is not present ")
