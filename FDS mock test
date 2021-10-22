@@ -1,0 +1,30 @@
+string = input("Enter string: ")
+long_word = 0
+for i in string.split():
+  if(len(i) > long_word):
+    long_word = len(i)
+print("longest word in the string is : ",i)
+print("length of longest word in the string is ",long_word)
+frequency = {}
+for i in string:
+    if i in frequency:
+        frequency[i]= frequency[i]+1
+    else:
+        frequency[i] = 1
+
+print("Count of all characters in the given string is :", str(frequency ))
+
+rev_str = reversed(string)
+
+if list(string) == list(rev_str):
+   print("The given string is a palindrome.")
+else:
+   print("The given string is not a palindrome.")
+
+sub_str = str(input('Enter the substring: '))
+if (string.find(sub_str) == -1):
+    print("substring not found")
+else:
+    print("substring found")
+
+    print("substring found at index",string.index(sub_str))
