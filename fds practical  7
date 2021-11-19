@@ -5,7 +5,7 @@ def eliminate_dupes(l):
             res.append(i)
     return res
 
-def display_assending(l):
+def display_ascending(l):
     l.sort()
     for i in l:
         print(f"Name of book: {i[1]}, its cost is {i[0]}")
