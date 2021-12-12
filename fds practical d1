@@ -2,13 +2,11 @@
 #include<string.h>
 #define max 50
 using namespace std;
-
 class STACK
 {
 	private:
 		char a[max];
 		int top;
-	
 	public:
 		STACK()
 		{
@@ -20,16 +18,13 @@ class STACK
 		void convert(char[]);
 		void palindrome();
 };
-
 void STACK::push(char c)
 {
 	top++;
 	a[top] = c;
 	a[top+1]='\0';
-	
 	cout<<endl<<c<<" is pushed on stack ...";
 }
-
 void STACK::reverse()
 {
 	char str[max];
@@ -41,11 +36,8 @@ void STACK::reverse()
 		cout<<a[i];
 		str[j]=a[i];
 	}
-	
 	cout<<endl;
 }
-
-
 void STACK::convert(char str[])
 {
 	int j,k,len = strlen(str);
@@ -69,50 +61,33 @@ void STACK::convert(char str[])
 
 	cout<<endl<<"Converted String : "<<str<<"\n";
 }
-
-
-
-
 void STACK::palindrome()
 {	
 	char str[max];
 	int i,j;		
-
 	for(i=top,j=0; i>=0; i--,j++)
 	{
 		str[j]=a[i];
 	}
 	str[j]='\0';
-	
-	
 	if(strcmp(str,a) == 0)
-		cout<<"\n\nString is palindrome...";
+		cout<<"\nString is a palindrome...";
 	else
-		cout<<"\n\nString is not palindrome...";
+		cout<<"\nString is not  a palindrome...";
 }
-
-
 int main()
 {
 	STACK stack;
-
 	char str[max];
 	int i=0;
-	
-	cout<<"\nEnter string to be reversed and check is it palindrome or not : \n\n";
-	
+	cout<<"\nEnter string to be reversed and to confirm if it is palindrome or not : \n";
 	cin.getline(str , 50);
-	
 	stack.convert(str);
-	
 	while(str[i] != '\0')
 	{
 		stack.push(str[i]);
 		i++;
 	}
-
 	stack.palindrome();
-
 	stack.reverse();
-	
 }
