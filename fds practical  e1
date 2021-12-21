@@ -1,67 +1,148 @@
 #include <iostream>
-#define MAX 10
 using namespace std;
-struct queue
-{       int data[MAX];
-	int front,rear;
-};
-class Queue
-{    struct queue q;
-   public:
-      Queue(){q.front=q.rear=-1;}
-      int isempty();
-      int isfull();
-      void enqueue(int);
-      int dequeue();
-      void display();
-};
-int Queue::isempty()
+const int MAX=10;
+class Job
 {
-	return(q.front==q.rear)?1:0;
+int id;
+int priority;
+public:
+void readData()
+{
+cout<<"\nEnter Job ID :: ";
+cin>>id;
+cout<<"\nEnter Job Priority :: ";
+cin>>priority;
 }
-int Queue::isfull()
-{    return(q.rear==MAX-1)?1:0;}
-void Queue::enqueue(int x)
-{q.data[++q.rear]=x;}
-int Queue::dequeue()
-{return q.data[++q.front];}
+void displayData()
+{
+cout<<"\n\t"<<id;
+cout<<"\t\t"<<priority;
+}
+friend class Queue;
+};
+
+class Queue
+{
+Job data[MAX];
+int front,rear;
+public:
+Queue()
+{
+front=rear=-1;
+}
+void enqueue();
+void dequeue();
+int isFull();
+int isEmpty();
+void display();
+};
+
+int Queue::isFull()
+{
+if(rear==MAX-1)
+return 1;
+else
+return 0;
+}
+
+int Queue::isEmpty()
+{
+if(rear==-1||front==rear+1)
+return 1;
+else
+return 0;
+}
+
+void Queue::enqueue()
+{
+if(isFull())
+{
+cout<<"\nCan't add ! Queue is Full !";
+}
+else
+{
+Job temp;
+temp.readData();
+if(rear==-1)
+{
+front++;
+data[++rear]=temp;
+cout<<"\nJob added successfully !";
+}
+else
+{
+int i=rear;
+while(i>=0 && data[i].priority>temp.priority)
+{
+data[i+1]=data[i];
+i--;
+}
+data[i+1]=temp;
+rear++;
+cout<<"\nJob added successfully !";
+}
+}
+}
+
+void Queue::dequeue()
+{
+if(isEmpty())
+{
+cout<<"\nCan't delete ! Queue is Empty !";
+}
+else
+{
+front++;
+cout<<"\nJob removed successfully !";
+}
+}
+
 void Queue::display()
-{   int i;
-    cout<<"\n";
-    for(i=q.front+1;i<=q.rear;i++)
-	     cout<<q.data[i]<<" ";
+{
+if(isEmpty())
+{
+cout<<"Queue is Empty !";
 }
+else
+{
+cout<<"\n\tJob ID\t\tJob Priority";
+cout<<"\n\t----------------------------";
+for(int i=front;i<=rear;i++)
+data[i].displayData();
+}
+}
+
 int main()
-{      Queue obj;
-	int ch,x;
-	do{    cout<<"\n 1.Insert Job";
-  cout<<"\n 2.Delete Job";
-  cout<<"\n 3.Display";
-  cout<<"\n 4.Exit";
-  cout<<"\nEnter Your Choice";
-  cin>>ch;
-	switch(ch)
-	{  case 1: if (!obj.isfull())
-		   {   cout<<"\n Enter data : \n";
-			cin>>x;
-			obj.enqueue(x);
-			cout<<endl;
-		   }
-	          else
-		      cout<< "Queue is overflowing!!\n\n";
-	           break;
-	   case 2: if(!obj.isempty())
-			    cout<<"\n Deleted Element = "<<obj.delqueue()<<endl;
-		    else
-			{   cout<<"\n Queue is underflow!!!\n\n";  }
-		    cout<<"\nRemaining Jobs : \n";
-		    obj.display();
-	           break;
-	  case 3: if (!obj.isempty())
-	        {  cout<<"\n Queue contains : \n";
-		       obj.display();
-	        }
-	        else
+{
+int ch;
+Queue q;
+cout<<"\n--------------Job Queue Menu (With Priorities)--------------";
+cout<<"\n1. Add Job";
+cout<<"\n2. Remove Job";
+cout<<"\n3. Display Jobs";
+cout<<"\n4. Exit";
+do
+{
+cout<<"\n--------------------------------------";
+cout<<"\nEnter your choice:";
+cin>>ch;
+cout<<"\n--------------------------------------";
+switch(ch) {
+case 1:
+q.enqueue();
+break
+;
+case 2:
+q.dequeue();
+break
+;
+case 3:
+q.display();
+break
+;
+}
+}while(ch!=4);
+}
 		         cout<<"\n Queue is empty!!!\n\n";
 	       break;
 	  case 4: cout<<"\n Exiting Program.....";
